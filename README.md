@@ -1,7 +1,7 @@
 # MATLAB Fall 2016 – Research Plan
 
 > * Group Name: The neuronal decision maker
-> * Group participants names: Brunner Georg, D'Errcio Cecilia
+> * Group participants names: Brunner Georg, D'Errico Cecilia
 > * Project Title: Decision making - The influence of older experience on decisions in the future
 
 ## General Introduction
