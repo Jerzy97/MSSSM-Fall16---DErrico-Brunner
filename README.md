@@ -1,44 +1,106 @@
 # MATLAB Fall 2016 – Research Plan
 
-> * Group Name: The neuronal decision maker
+> * Group Name: 
 > * Group participants names: Brunner Georg, D'Errico Cecilia
-> * Project Title: Decision making - The influence of older experience on decisions in the future
+> * Project Title: 
 
 ## General Introduction
 
-Drawing back on old experiences and knowledge is one important point in the process of opinion formation and decision making. In this paper we want to investigate the effects of older decisions, regarding similar situations, on those we are about to make in the future. Formulated in another way: How independent are our decisions?
+In our project we want to model the stability of an existing state, given a specific level of 
 
-This comprehensive question can, of course, not be answered within a single paper. Instead we want to contribute to the understanding of this topic by simulating a case, where those effects can be observed relatively easy. In particular one essential part of our work will be to implement an algorithm that is able to do data fitting using both, the 'fixed' knowledge given by us from the very beginning, as well as the experience gained from older fitting processes.
-The next step is the learning process, during which we are going to confront the program with datasets of mainly one distribution, so that it gains great experience on this one, but stays unfamiliar with other distribution kinds.
-Afterwards it is possible to check, whether our algorithm will still be able to distinguish one clearly defined distribution from the one it has great experience of.
+This project deals with the stability of an existing state. In partiuclar we want to model the dynamics that arise from the coexisting of two actors. The central government on the one hand, and on the other its civils.
+While the government is responsible for building and maintaining infrastructure
+
+One of the key tasks for a government, when maintaining the stability of a state 
 
 ## The Model
 
-Our model will be based on concepts, which are usually found in machine learning algorithms. Since we are interested in human decision making, the most appropriate type of 'learner' would probably be a neural network, which is often and with reason refered to as the bionically inspired approach of artificial intelligence.
+The dynamical agent-based model:
 
-### Note
+1) ACTORS
 
-Since the groups background in machine learning is not huge, this will take a considerable amount of our project-time.
-If there's time left, different approaches can be chosen and results compared.
+there are two kind of actors: agents (citizens) and forces of central authority (cops)
+
+2) PARAMETERS
+
+- H:	agent perceived hardship from government
+	H = [0%,100%]
+
+- L:	agent perceived legitimacy of government
+	L = [0%,100%]
+	L proportional to I
+
+- G:	agent's level of grievance (sense of injustice)
+	G = [0%,100%]
+	G=H(1-L)
+
+- R:	agent's level of risk aversion
+	R = [0%,100%]
+
+- N:	agent's net risk
+	N = [0%,100%]
+	N = RP
+
+- V:	agent's age
+	V = [0, 80]
+
+3) DYNAMICS
+
+- Actors dynamics:		not moving or moving randomly between the 4 spaces 
+				(N, S, E, W) near them
+
+- Agent's states:		either Q (quiet, meaning inactive)
+				or A (active, meaning rebelling)
+
+- Agent state transition rule:	if (G-N) > T be active, otherwise be quiet
+
+- Cop's arresting rule:		inspect all sites within vision (N, S, E, W)
+				and arrent one active agent randomly with 
+				probability P
+
+- Cop's arresting probability:	P = [0%,100%]
+
+- Jail time:			J = [0, Jmax]
+
+_______________________________________________________________
+The government parameters:
+
+1) GOVERNMENT PARAMETERS
+
+- total taxes income: 		T proportional to number of citizens
+
+- homogenization investment:	I = [0%,100%]
+
+- homogenization cost:		C : [min%,100%] -> [min, T]
+				strictly growing function, as defined in paper A)
+				min proportional to the number of cops (salary)
+
+- homogenization effort:	E = [C(0), C(100%)]
+
+2) GOVERNMENT DECISION
+
+- an great number of active rebels will eventually result in a separation from the
+  government
+
+- government must decide how much of its total income to invest in homogenization 
+  processes: a big investment will increase the perceived legitimacy of the government.
+
+
 
 ## Fundamental Questions
 
-As mentioned above, our main questions can be summarized as follows:
-* How are we influenced by our older decisions?
-* Is it, after a long time of devoting oneself to a specific topic, still possible to be open minded for different solutions or will there be a significant tendency to applying the same scheme again and again?
-* Can we trick our model after a long time feeding the same distribution?
 
 ## Expected Results
 
-Since a neural network is well known for having a certain degree of inaccuracy tolerance, we actually believe we can trick our program.
+
 
 ## References 
 
-Russell, Stuart & Norvig, Peter (2009): Artificial Intelligence, A new approach
+* Epstein, Joshua, Modeling civil violence. An agent-based computational approach, 2002
+* Alesina, Alberto, Reich, Bryony, Nation building, 2012
 
 ## Research Methods
 
-Implementing a neural network, we certainly use some kind of an agent-based model.
 
 ## Other
 
