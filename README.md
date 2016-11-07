@@ -86,11 +86,9 @@ The government parameters:
 
 ## Fundamental Questions
 
-Within our work we want wo 
+Within our work we want wo find an optimum between exacted taxes and expenses for homogenization.
 
 ## Expected Results
-
-
 
 ## References 
 
