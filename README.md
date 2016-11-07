@@ -6,28 +6,25 @@
 
 ## General Introduction
 
-In our project we want to model the stability of an existing state, given a specific level of 
+When delving among some history books, one certainly comes across uncountable pages about revolutions. In the case of many of them a precursor was some kind of civil resistance against the prevailing authority - a rebellion. Within this project we want to investigate the dynamics of such a rebellion, which, besides some factors like for instance spill-over effects, when there's a rebellion in neighbor countries, mainly depends on the interaction of two actors. On the one hand the authority itself, represented by a number of institutions, which we will narrow down to one - the police - while on the other hand there are the citizens.
 
-This project deals with the stability of an existing state. In partiuclar we want to model the dynamics that arise from the coexisting of two actors. The central government on the one hand, and on the other its civils.
-While the government is responsible for building and maintaining infrastructure
-
-One of the key tasks for a government, when maintaining the stability of a state 
+Building on models that implemented just that we want to extend this simulation, by giving the authority more options of interaction, i.e. the citizens grievance apparently depends on the distance - in a sense of preferences (Alesina, Reich) - between citizen and government. That distance can be reduced by an act of homogenization, as it can be achieved by investing in infrastruture.
 
 ## The Model
 
-The dynamical agent-based model:
+1. ACTORS
 
-1) ACTORS
+There are two kind of actors
+- Agents (citizens)
+- Forces of central authority (cops)
 
-there are two kind of actors: agents (citizens) and forces of central authority (cops)
+2. PARAMETERS
 
-2) PARAMETERS
+- H: Agent's perceived hardship from government
+H = [0%,100%]
 
-- H:	agent perceived hardship from government
-	H = [0%,100%]
-
-- L:	agent perceived legitimacy of government
-	L = [0%,100%]
+- L: Agent's perceived legitimacy of government
+L = [0%,100%]
 	L proportional to I
 
 - G:	agent's level of grievance (sense of injustice)
@@ -44,7 +41,7 @@ there are two kind of actors: agents (citizens) and forces of central authority 
 - V:	agent's age
 	V = [0, 80]
 
-3) DYNAMICS
+3. DYNAMICS
 
 - Actors dynamics:		not moving or moving randomly between the 4 spaces 
 				(N, S, E, W) near them
@@ -65,7 +62,7 @@ there are two kind of actors: agents (citizens) and forces of central authority 
 _______________________________________________________________
 The government parameters:
 
-1) GOVERNMENT PARAMETERS
+1. GOVERNMENT PARAMETERS
 
 - total taxes income: 		T proportional to number of citizens
 
@@ -77,7 +74,7 @@ The government parameters:
 
 - homogenization effort:	E = [C(0), C(100%)]
 
-2) GOVERNMENT DECISION
+2. GOVERNMENT DECISION
 
 - an great number of active rebels will eventually result in a separation from the
   government
@@ -89,6 +86,7 @@ The government parameters:
 
 ## Fundamental Questions
 
+Within our work we want wo 
 
 ## Expected Results
 
@@ -96,11 +94,12 @@ The government parameters:
 
 ## References 
 
-* Epstein, Joshua, Modeling civil violence. An agent-based computational approach, 2002
-* Alesina, Alberto, Reich, Bryony, Nation building, 2012
+- Epstein, Joshua, Modeling civil violence. An agent-based computational approach, 2002
+- Alesina, Alberto, Reich, Bryony, Nation building, 2012
 
 ## Research Methods
 
+For our realization of the model we chose an agent based model, pretty similar to the one implemented by Epstein's work "Modeling civil violence".
 
 ## Other
 
