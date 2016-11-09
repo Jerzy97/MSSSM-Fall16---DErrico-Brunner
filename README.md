@@ -1,8 +1,8 @@
 # MATLAB Fall 2016 – Research Plan
 
-> * Group Name: 
+> * Group Name: The central authority
 > * Group participants names: Brunner Georg, D'Errico Cecilia
-> * Project Title: 
+> * Project Title: Agent based simulation of a rebellion's dynamics
 
 ## General Introduction
 
@@ -22,10 +22,11 @@ There are two kind of actors
 
 - H: Agent's perceived hardship from government
 H = [0%,100%]
+H=Hmax*CI
 
 - L: Agent's perceived legitimacy of government
 L = [0%,100%]
-	L proportional to I
+	L=Lmax*PI
 
 - G:	agent's level of grievance (sense of injustice)
 	G = [0%,100%]
@@ -49,11 +50,11 @@ L = [0%,100%]
 - Agent's states:		either Q (quiet, meaning inactive)
 				or A (active, meaning rebelling)
 
-- Agent state transition rule:	if (G-N) > T be active, otherwise be quiet
+- Agent state transition rule:	if (G-N) > Treshold be active, otherwise be quiet
 
 - Cop's arresting rule:		inspect all sites within vision (N, S, E, W)
 				and arrent one active agent randomly with 
-				probability P
+				probability P=CI*Pmax
 
 - Cop's arresting probability:	P = [0%,100%]
 
@@ -64,31 +65,31 @@ The government parameters:
 
 1. GOVERNMENT PARAMETERS
 
-- total taxes income: 		T proportional to number of citizens
+- propaganda investment:	PI = [0%,100%]
 
-- homogenization investment:	I = [0%,100%]
+- cops investment  :        CI = [0%,100%]
 
-- homogenization cost:		C : [min%,100%] -> [min, T]
-				strictly growing function, as defined in paper A)
-				min proportional to the number of cops (salary)
-
-- homogenization effort:	E = [C(0), C(100%)]
+- general investment:       (GI) Investment for the development for the country
+                            GI+CI+HI=1
 
 2. GOVERNMENT DECISION
 
 - an great number of active rebels will eventually result in a separation from the
   government
 
-- government must decide how much of its total income to invest in homogenization 
-  processes: a big investment will increase the perceived legitimacy of the government.
-
-
+- government must decide how much of its total income to invest in propaganda and cops, in order to avoid rebellions. However the governments wants the general investment to be maximized, as long as it doesn't result in the opening of a possibility of a destabilization through rebellion.
 
 ## Fundamental Questions
 
-Within our work we want wo find an optimum between exacted taxes and expenses for homogenization.
+Within our work we want to find the optimum investments - PI, CI, GI - such that:
+
+- There's no rebellion, that will end the state
+
+- PI & CI are minimized
 
 ## Expected Results
+
+We expect a model showing interesting rebellion dynamics.
 
 ## References 
 
