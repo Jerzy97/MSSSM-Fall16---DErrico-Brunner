@@ -1,0 +1,48 @@
+TO-DO:
+Finish Cop Updating
+Start thinking of updating processes for each group
+----> Introduce new kind of Actor in M matrix: 3 for rebels
+
+Move at end of updating process!
+
+In generate_actor: Is the less sign correct (line 40)
+Defined neighbors: 8
+
+Updating Processes:
+
+ -> Empty Cells: Birth & getting filled citizens released from jail
+ -> Citizen: Update personal parameters (Felt hardship & stuff), move, die
+ -> Rebell: Move (what are they actually doing?) maybe not paying taxes, die
+ -> Jail: Decrement Jail Time & if zero fill empty spots, die
+ -> Cops: Arrest, move, die
+
+Cop:
+1. 2 (Role)
+2. V (Age)
+3. P (Arrest probability)
+4. 0
+.
+.
+.
+9. 0
+
+Citizen:
+1. 1 (Role)
+2. V (Age)
+3. H (Hardship)
+4. L (Legitimacy)
+5. G (Grievance)
+6. R (Risk aversion)
+7. N (Net Risk) 
+8. S (State - in-/active)
+
+
+
+Instead of setting random parameters of: Cop Distribution, Percentage of map occupied, etc. we could use real world Data!
+Inspiration by: Empirical Performance of a Decentralized Civil Violence Model - Klemens, Epstein , Hammond, Raifman
+Possible Datasets: PITF
+
+From empirical studies (paper above) we learn that the so called "Repressive Capacity" is quite an important factor. It has been approximated by the military expenses as a percentage of GNI (BIP), but also Jail time will probably influence this one.
+We need to be particularly cautious setting Jail Time therefore!
+
+Count people for taxes: Need to clear who pays taxes -> do active rebellion members pay taxes?
