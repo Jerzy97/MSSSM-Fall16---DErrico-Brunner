@@ -2,10 +2,9 @@ function neighbors = find_neighbors(CellIndex, GridSize)
 % For a given Cell Index and the Grids size,
 % find the cell indizes of the neighbors
 % neighbors contains the indices of the Actor's neighbors
-% as well as the neighbors 
 
-% For now only 4 immediate neighbors
-k = [1 0; -1 0; 0 1; 0 -1];
+% We chose 1. order Moorehood
+k = [1 0; -1 0; 0 1; 0 -1; 1 1; 1 -1; -1 1; -1 -1];
 
 [x,y] = coordinates(CellIndex, GridSize);
 neighbors=[];

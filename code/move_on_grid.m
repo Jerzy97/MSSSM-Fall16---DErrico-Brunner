@@ -10,14 +10,14 @@ function [M, E, ACTOR] = move_on_grid(CellIndex, M, E, ACTOR)
 % Probability of moving - higher if more empty spots
 Prob = 1;
 
-GridSize=fix(sqrt(size(M, 2)));
+GridSize=round(sqrt(size(M, 2)));
 neighbors = find_neighbors(CellIndex, GridSize);
 
 for i=1:length(neighbors)
     if (M(2, neighbors(i))==0) && (rand()<Prob)
         % Swap columns
-        M(:, [CellIndex neighbors(i)])=M(:, [neighbors(i) CellIndex]);
-        M(E==neighbors(i))=CellIndex;
+        M(2:end, [CellIndex neighbors(i)])=M(2:end, [neighbors(i) CellIndex]);
+        E(E==neighbors(i))=CellIndex;
         ACTOR(ACTOR==CellIndex)=neighbors(i);
         break
     end

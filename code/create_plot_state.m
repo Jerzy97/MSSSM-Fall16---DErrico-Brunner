@@ -1,4 +1,4 @@
-function [ ] = create_image( M )
+function  create_plot_state( M )
 % This function plots an image given the length x 10 matrix describing all
 % the citizens in the grid, according to the color code:
 
@@ -9,28 +9,16 @@ function [ ] = create_image( M )
 % active citizen     4                red       204   0       0
 
 % extract the size of the grid
-length=sqrt(max(size(M)))
-massimo = max(size(M))
+GridSize=sqrt(size(M,2));
+
 % create color map
 MAP = [255 255 255; 0 0 255; 0 255 0; 255 0 0]/255;
 
 % create matrix describing the grid
-GRID = zeros(length)
-for i=1:1:max(size(M))
-    [x,y] = coordinates(i,length)
-    switch M(2,i) % check cell state 0-empty/ 1-citizen/ 2-cop
-        case 0
-            GRID(x,y)=1;
-        case 1
-            switch M(9,i) % check if citizen is an active rebel 0-quiet/ 1-rebel
-                case 0
-                    GRID(x,y)=2;
-                case 1
-                    GRID(x,y)=4;
-            end
-        case 2
-            GRID(x,y)=3;
-    end
+GRID = zeros(GridSize);
+for i=1:max(size(M))
+    [x,y] = coordinates(i,GridSize);
+    GRID(y, x) = M(2, i) + 1;
 end
 
 clf
@@ -38,7 +26,3 @@ colormap(MAP)
 image(GRID)
 
 end
-
-
-%GRID(mod(i,length),floor(i/length))=M(i,2)+1;
-

@@ -1,12 +1,15 @@
 TO-DO:
-Finish Cop Updating
-Start thinking of updating processes for each group
-----> Introduce new kind of Actor in M matrix: 3 for rebels
+Finish second plotting function
 
-Move at end of updating process!
+Added Cops grievance and set it to -1 -> easier to distinct between cops and empty cells when plotting
+
+Starting simulations: what shall we actually record? Which parameters to observe?
+
+Need to decide what to record: Interesting probably grievance vs. state
 
 In generate_actor: Is the less sign correct (line 40)
-Defined neighbors: 8
+
+Need to set function for cop arresting ability (Dependent on expenditure on public order and safety)
 
 Updating Processes:
 
@@ -34,7 +37,6 @@ Citizen:
 5. G (Grievance)
 6. R (Risk aversion)
 7. N (Net Risk) 
-8. S (State - in-/active)
 
 
 

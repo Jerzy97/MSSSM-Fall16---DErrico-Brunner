@@ -6,39 +6,41 @@ function [ def ] = generate_actor( perc_cops, perc_occupied, CI, PI, treshhold)
 % using the following parameters:
 % perc_cops: (nr_cops)/(nr_citizens+nr_cops)
 % perc: the percentual of grid we want to be occupied by someone
-% size: the size of the grid
-def=zeros(9,1);
+
+def=zeros(7,1);
 P=rand;
-if rand>perc_occupied
-    % define nobody on the cell
-    def=zeros(9,1);
-else
-    if rand<perc_cops
-        % define cop function
-        def(1)=2;
-        % define age V
-        def(2)=fix(rand*40+20);
-        % define arrest probability P ---> now set it random
-        def(3)=P;
-    else
-        % define citizen function
+
+distr=rand();
+
+if (distr>(1-perc_occupied)) && (distr<(1-perc_occupied*(1-perc_cops)))
+    % define cop function
+    def(1)=2;
+    % define age V
+    def(2)=fix(rand*40+20);
+    % define arrest probability P ---> now set it random
+    def(3)=P;
+    % set all other values to -1, so it can be distincted from an empty
+    % cell, when necessary
+    def(4:end)=-1;
+    
+elseif distr>(1-perc_occupied*(1-perc_cops))
+    % define age V
+    def(2)=fix(rand*60+20);
+    % define hardship from government H  ---> now set it random
+    def(3)=rand;
+    % define legitimacy of government L  ---> now set it random
+    def(4)=rand;
+    % define grievance G
+    def(5)=def(3)*(1-def(4));
+    % define agent's risk aversion R ---> now set it random
+    def(6)=rand;
+    % define agent's net risk N
+    def(7)=def(6)*P;
+    % define state
+    if (def(5)-def(7))>treshhold
         def(1)=1;
-        % define age V
-        def(2)=fix(rand*60+20);
-        % define hardship from government H  ---> now set it random
-        def(3)=rand;
-        % define legitimacy of government L  ---> now set it random
-        def(4)=rand;
-        % define grievance G
-        def(5)=def(3)*(1-def(4));
-        % define agent's risk aversion R ---> now set it random
-        def(6)=rand;
-        % define agent's net risk N
-        def(7)=def(6)*P;
-        % define state
-        if (def(5)-def(7))>treshhold
-            def(8)=1;
-        end
+    else
+        def(1)=3;
     end
 end
 end
