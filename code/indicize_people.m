@@ -1,28 +1,43 @@
-function [ empty_cell_position , citizens_cell_position, cops_cell_position, rebels_cell_position ] = indicize_people( M )
+function [ E, CITQUIET, COP, REB ] = indicize_people( M )
 % This function creates four arrays 
-% - empty_cell_position : containing all the cell numbers that are free
-% - citizens_cell_position : containing all the cell numbers that are
+% - E : containing all the cell numbers that are free
+% - CITQUIET : containing all the cell numbers that are
 % occupied by a quiet citizen
-% - cops_cell_position : containing all the cell numbers that are occupied
+% - COP : containing all the cell numbers that are occupied
 % by a cop
-% - rebels_cell_position : containing all the cell numbers that are
+% - REB : containing all the cell numbers that are
 % occupied by a rebel
-empty_cell_position = [];
-citizens_cell_position = [];
-cops_cell_position = [];
-rebels_cell_position = [];
+E = [];
+CITQUIET = [];
+COP = [];
+REB = [];
 
 for i=1:size(M, 2)
     switch M(2,i) % let's check identification value
         case 0 % we have an empty cell
-            empty_cell_position(end+1) = i;
+            E(end+1) = i;
         case 1 % we have a citizen
-                citizens_cell_position(end+1) = i;
+            CITQUIET(end+1) = i;
         case 2 % we have a cop
-            cops_cell_position(end+1) = i;
+            COP(end+1) = i;
         case 3 % rebell
-            rebels_cell_position(end+1) = i;
+            REB(end+1) = i;
     end
 end
+
+% Exception for empty vectors (would cause error)
+if isempty(E)
+    E = 0;
+end
+if isempty(CITQUIET)
+    CITQUIET = 0;
+end
+if isempty(COP)
+    COP = 0;
+end
+if isempty(REB)
+    REB = 0;
+end
+
 end
 

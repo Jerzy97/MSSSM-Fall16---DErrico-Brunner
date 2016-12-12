@@ -1,12 +1,14 @@
-function neighbors = find_neighbors(CellIndex, GridSize)
+function neighbors = find_neighbors_2nd_moore(index, GridSize)
 % For a given Cell Index and the Grids size,
 % find the cell indizes of the neighbors
 % neighbors contains the indices of the Actor's neighbors
 
-% We chose 1. order Moorehood
-k = [1 0; -1 0; 0 1; 0 -1; 1 1; 1 -1; -1 1; -1 -1];
+% 2nd order Moore neighborhood
+k = [1 0; -1 0; 0 1; 0 -1; 1 1; 1 -1; -1 1; -1 -1;
+     2 -2; 2 -1; 2 0; 2 1; 2 2; -2 -2; -2 -1; -2 0; -2 1; -2 2;
+     1 -2; 1 2; 0 -2; 0 2; -1 -2; -1 2];
 
-[x,y] = coordinates(CellIndex, GridSize);
+[x,y] = coordinates(index, GridSize);
 neighbors=[];
 
 for i=1:size(k,1)

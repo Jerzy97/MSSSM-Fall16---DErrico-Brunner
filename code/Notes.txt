@@ -1,15 +1,23 @@
 TO-DO:
-Finish second plotting function
 
-Added Cops grievance and set it to -1 -> easier to distinct between cops and empty cells when plotting
+Multiple actors are updated during one iteration! WHY? :'(
+
+Hardship does not change
+
+Introduce Alessinas utility function and use it for Legitimacy -> this of course is not the whole story, but acounts for the parameters we want to observe (income and taxes)
+
+Observe behaviour for sudden changes of legitimacy -> test states stability
+
+When running the model for different values of CI/CP etc. we should set some benchmark to record "outbursts" (Epstein choose 50)
+
+Proposal for the Cop arresting efficiency function:
+P(CI)=Pmax-Const1*Exp(-Const2*Ci)
+P(Cop2ActiveRatio)=1 - 1/(1 + Exp(-10 CA)) (Sigmoid function)
+This comes from the idea that at some threshold if the cop to active ratio is too high, cops will not execute their job anymore!
+Could be negative, but for the simplicity of our program we did not account for that
 
 Starting simulations: what shall we actually record? Which parameters to observe?
-
 Need to decide what to record: Interesting probably grievance vs. state
-
-In generate_actor: Is the less sign correct (line 40)
-
-Need to set function for cop arresting ability (Dependent on expenditure on public order and safety)
 
 Updating Processes:
 
@@ -19,32 +27,8 @@ Updating Processes:
  -> Jail: Decrement Jail Time & if zero fill empty spots, die
  -> Cops: Arrest, move, die
 
-Cop:
-1. 2 (Role)
-2. V (Age)
-3. P (Arrest probability)
-4. 0
-.
-.
-.
-9. 0
-
-Citizen:
-1. 1 (Role)
-2. V (Age)
-3. H (Hardship)
-4. L (Legitimacy)
-5. G (Grievance)
-6. R (Risk aversion)
-7. N (Net Risk) 
-
-
-
 Instead of setting random parameters of: Cop Distribution, Percentage of map occupied, etc. we could use real world Data!
 Inspiration by: Empirical Performance of a Decentralized Civil Violence Model - Klemens, Epstein , Hammond, Raifman
 Possible Datasets: PITF
-
-From empirical studies (paper above) we learn that the so called "Repressive Capacity" is quite an important factor. It has been approximated by the military expenses as a percentage of GNI (BIP), but also Jail time will probably influence this one.
-We need to be particularly cautious setting Jail Time therefore!
 
 Count people for taxes: Need to clear who pays taxes -> do active rebellion members pay taxes?
