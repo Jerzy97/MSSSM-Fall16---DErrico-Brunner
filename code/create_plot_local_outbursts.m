@@ -1,4 +1,4 @@
-function create_plot_local_outbursts(SaveM)
+function create_plot_local_outbursts(SaveM, CI, PI)
 % This function plots the maximum local outburst per timestep
 % Local means a subgrid 7x7 (3rd order Moore). On each subgrid of the total
 % grid the rebels are counted and the maximum is plotted later
@@ -29,12 +29,14 @@ for t=1:intervall
     end
 end
 
-f=figure;
+fig=figure;
+set(gcf,'visible','off')
 % Plot results
-p=plot(1:intervall, outbursts, 'r');
+plot(1:intervall, outbursts, 'r');
 % p.LineWidth=2;
-title('Local outbursts')
-axis([0 intervall -0.01 40])
-saveas(f, 'LocalOutbursts.png', 'png')
+title(['Local outbursts: CI = ' num2str(CI) ' PI = ' num2str(PI)])
+axis([0 intervall -0.01 50])
+filename = fullfile('../data/Local Outburst Plots/', ['local_outburst_plot_CI=' num2str(CI) '_PI=' num2str(PI) '.png']);
+saveas(fig, filename, 'png')
 
 end

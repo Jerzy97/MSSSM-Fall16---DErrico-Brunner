@@ -1,18 +1,32 @@
-function create_plot_population(time, num)
+function create_plot_population(SaveNum, CI, PI)
 % This function plots the number of inhabitants belonging to each group,
 % i.e. empty cell, citizen, cop, rebel, as a function of time
 % Parameters:
 %       - time: The simulations duration (intervall)
 %       - num: the vector containing each groups pop. number (SaveNum)
 
-figure
+SimuDuration = size(SaveNum, 2);
+
+fig = figure;
+%set(gcf,'visible','off')
 hold on
-plot(1:time, num(1, :))
-plot(1:time, num(2, :))
-plot(1:time, num(3, :))
-plot(1:time, num(4, :))
-plot(1:time, num(5, :))
+p=plot(1:SimuDuration, SaveNum(1, :));
+p.LineWidth=1.5;
+p=plot(1:SimuDuration, SaveNum(2, :));
+p.LineWidth=1.5;
+p=plot(1:SimuDuration, SaveNum(3, :));
+p.LineWidth=1.5;
+p=plot(1:SimuDuration, SaveNum(4, :));
+p.LineWidth=1.5;
+p=plot(1:SimuDuration, SaveNum(5, :));
+p.LineWidth=1.5;
+xlabel('Time')
+ylabel('Total share of population')
 legend('Empty Cells', 'Quiet Citizen', 'Cops', 'Rebels', 'Prisoners')
-title('Population curves')
+title(['Population curves: CI = ' num2str(CI) ' PI=' num2str(PI)])
+filename = fullfile('../data/Population Curve Plots/', ['population_plot_CI=' num2str(CI) '_PI=' num2str(PI) '.png']);
+filename2 = fullfile('../data/Population Curve Plots/', ['population_plot_CI=' num2str(CI) '_PI=' num2str(PI) '.fig']);
+saveas(fig, filename, 'png')
+saveas(fig, filename2, 'fig')
 
 end

@@ -21,16 +21,21 @@ end
 % by the amount of Rebels. (Described by a Sigmoid function)
 % Cops will never defect!
 ActiveToCopRatio = active_cop_ratio(M, index, GridSize);
-cop(3) = 0.8*(1 - exp(-10*CI))-(1/(1.25 + exp(-10*ActiveToCopRatio + 120)));
+cop(3) = 0.8*((1 - exp(-5*CI))-(1/(1.25 + exp(-0.5*ActiveToCopRatio + 5))));
 
 % Put back into grid
 M(2:end, index) = cop;
+
+% Maximum Jail Time
+JTimeMax = 20;
 
 % Arrest
 neighbors=find_neighbors_1st_moore(index, GridSize);
 for n=1:length(neighbors)
     if (M(2, neighbors(n)) == 3) && (rand<cop(3))
-         J=[M(2:end, neighbors(n)) J];
+         JailTime = JTimeMax*rand;
+         prisoner = [M(2:end, neighbors(n)); JailTime];
+         J=[prisoner J];
          % No rebel anymore
          J(1,1)=1;
          M(2:end, neighbors(n))=zeros(7,1);

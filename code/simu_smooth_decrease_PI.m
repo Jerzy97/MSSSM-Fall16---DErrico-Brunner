@@ -1,30 +1,31 @@
-% This script iterates all the processes
-% Can be fusioned with other files later
-
-% Initializing
+function SaveM = simu_smooth_decrease_PI(CI, PI)
+% PI should initially be at least more than 0.1
 
 % Define duration of simulation
-intervall = 300;            %[Days]
+intervall = 300;
 
 % define the size of the grid -> Output: GridSize x GridSize
 GridSize = 40;
 % percentual cops: (nr_cops)/(nr_citizens+nr_cops)
-perc_cops = 0.05;
+perc_cops = 0.075;
 % percentual occupied map
 perc_occupied = 0.8;
-% set CI
-CI = 0.2;
-% set PI
-PI = 0.3;
 % set rebel active state treshhold
-threshold = 0.2;
+threshold = 0.5;
+
+% For our model, we assume the State needs constant income in order not to
+% collapse. This means this income has to be split equally amongst the
+% population. The actual value is not of interest, only percentual values
+StateIncome = 1;
+% Initially all citizen are treated as non-active
+taxes = 1/((1-perc_occupied*perc_cops)*GridSize*GridSize);
 
 % Create Actors
-M = create_initial_matrix(GridSize, perc_cops , perc_occupied, CI, PI, threshold);
+M = create_initial_matrix(GridSize, perc_cops , perc_occupied, CI, PI, threshold, taxes);
 
 % Initialize Jail Matrix, containing rebells in jail
 % Jail is a FIFO system (entering left, exiting right)
-J = zeros(7, 1);
+J = zeros(8, 1);
 
 % Initialize need Structs, matrices, vectors, etc.
 % VidFrame = struct('cdata', cell(1,intervall), 'colormap', cell(1,intervall));
@@ -34,6 +35,9 @@ SaveNum = zeros(5, intervall);
 % The main goal is to achieve the most uniform way of
 % updating -> no missleading dynamics
 for t=1:intervall
+    
+    % PI is getting reduced every timestep
+    PI = PI - 0.00075;
     
     SaveM(:,:,t)=M;
     
@@ -47,11 +51,17 @@ for t=1:intervall
     num(5)=size(J, 2);
     SaveNum(:,t)=num;
     
+    % State income has to be constant, rebels are not paying taxes
+    taxes = StateIncome/num(2);
+    
     % Randomize each group itself
     E=E(randperm(num(1)));
     CITQUIET=CITQUIET(randperm(num(2)));
     COP=COP(randperm(num(3)));
-    REB=REB(randperm(num(4)));    
+    REB=REB(randperm(num(4)));
+    
+    % Decrease Jail Time
+    J(8,:) = J(8,:)-1;
     
     % Update the whole Grid
     for i=1:size(M,2)
@@ -92,7 +102,7 @@ for t=1:intervall
             currentIndex=E(end);
             
             % Update cell
-            [M, J] = update_free_cell(M, J, currentIndex, num(1), perc_cops, perc_occupied, CI, PI, threshold);
+            [M, J] = update_free_cell(M, J, currentIndex, num(1), perc_cops, perc_occupied, CI, PI, threshold, taxes);
             
             % Update E
             if length(E)>1
@@ -106,7 +116,7 @@ for t=1:intervall
             currentIndex=CITQUIET(end);
             
             % Update
-            M = update_citizen(M, currentIndex, threshold);
+            M = update_citizen(M, currentIndex, PI, threshold, taxes);
             
             % Move
             [M, E, CITQUIET] = move_on_grid(M, E, CITQUIET);
@@ -142,7 +152,7 @@ for t=1:intervall
             currentIndex=REB(end);
             
             % Update rebel
-            M = update_citizen(M, currentIndex, threshold);
+            M = update_citizen(M, currentIndex, PI, threshold, taxes);
             
             % Move
             [M, E, REB] = move_on_grid(M, E, REB);
@@ -162,17 +172,18 @@ for t=1:intervall
     % create_plot_state(M);
     % VidFrame(t)=getframe();
     
-    % pause(0.01)
+    %pause(0.1)
 end
 
 % Plot the data
-create_plot_population(intervall, SaveNum);
-create_plot_local_outbursts(SaveM);
+create_error_plot_population(SaveNum, CI, 0.3);
+% create_plot_local_outbursts(SaveM, CI, PI);
+% create_plot_total_outbursts(SaveNum, CI, PI);
 
 % Save data
-% v = VideoWriter('CivilViolenceSimu.avi', 'Uncompressed AVI');
-% open(v)
-% writeVideo(v, VidFrame);
-% close(v)
+%v = VideoWriter('CivilViolenceSimu.avi', 'Uncompressed AVI');
+%open(v)
+%writeVideo(v, VidFrame);
+%close(v)
 
-
+end
